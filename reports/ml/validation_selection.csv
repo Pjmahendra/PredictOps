@@ -1,0 +1,6 @@
+model,oof_pr_auc,oof_mcc,oof_f1,oof_recall,oof_precision,threshold,params
+xgboost,0.9992,0.989,0.9912,0.9871,0.9954,0.5159,"{""subsample"": 0.7, ""n_estimators"": 600, ""min_child_weight"": 20, ""max_depth"": 2, ""learning_rate"": 0.03, ""colsample_bytree"": 1.0}"
+logreg,0.9992,0.9897,0.9918,0.9889,0.9947,0.7733,"{""penalty"": ""l2"", ""C"": 0.001}"
+svm,0.9987,0.9884,0.9908,0.9889,0.9926,0.0063,"{""gamma"": 0.01, ""C"": 10.0}"
+rf,0.9939,0.989,0.9912,0.9871,0.9954,0.3741,"{""n_estimators"": 100, ""min_samples_leaf"": 50, ""max_features"": ""sqrt"", ""max_depth"": null}"
+tree,0.988,0.98,0.9841,0.9871,0.9811,0.9707,"{""min_samples_leaf"": 500, ""max_depth"": 4}"

@@ -1,0 +1,8 @@
+month,minutes,features_major,features_moderate,max_psi,top_drifting_feature,anomaly_flag_share,anomaly_score_psi,split
+2020-02,35527,14,2,3.8691,Oil_temperature_std_30min,0.0,0.6942,train
+2020-03,38109,9,3,1.3375,Oil_temperature_std_30min,0.001,0.0357,train
+2020-04,30317,5,2,1.3616,Oil_temperature_std_30min,0.0477,0.1315,train
+2020-05,31195,8,6,2.0152,Oil_temperature_std_30min,0.0158,0.1121,train
+2020-06,31878,12,1,4.3355,Oil_temperature_mean_30min,0.0944,0.2185,validation
+2020-07,36115,11,3,4.2025,Oil_temperature_mean_30min,0.0143,0.0397,test
+2020-08,36448,13,2,3.6229,Oil_temperature_mean_30min,0.0013,0.3545,test

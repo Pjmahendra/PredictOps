@@ -1,0 +1,1 @@
+{"status":"ok","models_loaded":true,"model_versions":{"failure_detector":"xgboost-v1-20261106","anomaly_detector":"anomaly-ocsvm-v1-20261106"},"database":"ok"}

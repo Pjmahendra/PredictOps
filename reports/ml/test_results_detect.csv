@@ -1,0 +1,6 @@
+model,pr_auc,roc_auc,f1,precision,recall,balanced_accuracy,mcc,cohen_kappa,accuracy,brier,fpr,fnr,tp,fp,fn,tn,threshold,event4_detected,event4_lead_time_min,false_alarm_episodes,false_alarms_per_day,train_seconds,inference_ms_per_row,selected
+logreg,0.0398,0.5808,0.0,0.0,0.0,0.5,-0.0003,-0.0001,0.9963,0.0038,0.0,1.0,0,2,270,72379,0.7733,False,,0,0.0,0.7,0.0004,False
+tree,0.0456,0.6858,0.0,0.0,0.0,0.5,0.0,0.0,0.9963,0.0039,0.0,1.0,0,0,270,72381,0.9707,False,,0,0.0,1.5,0.0003,False
+rf,0.1629,0.9882,0.0,0.0,0.0,0.5,0.0,0.0,0.9963,0.0035,0.0,1.0,0,0,270,72381,0.3741,False,,0,0.0,254.8,0.0009,False
+svm,0.0031,0.1999,0.0,0.0,0.0,0.4997,-0.0015,-0.001,0.9957,0.0037,0.0006,1.0,0,42,270,72339,0.0063,False,,1,0.0198,0.6,0.0046,False
+xgboost,0.4802,0.9853,0.0,0.0,0.0,0.5,0.0,0.0,0.9963,0.0035,0.0,1.0,0,0,270,72381,0.5159,False,,0,0.0,3.5,0.0036,True

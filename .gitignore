@@ -1,0 +1,29 @@
+# Environment
+.venv/
+.env
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.pytest_cache/
+.DS_Store
+logs/
+
+# Raw data is NOT committed (218 MB > GitHub's 100 MB limit). Get it from UCI; checksums in data/raw/SHA256SUMS.
+data/raw/*.csv
+data/uploads/
+data/train/
+data/validation/
+data/test/
+
+# Large regenerable intermediates (rebuild with: python run.py pipeline)
+data/processed/features_1min.parquet
+data/processed/metropt3_labeled.parquet
+
+# Runtime artifacts needed by the deployed app ARE committed (all < 100 MB):
+#   data/intermediate/metropt3.parquet (27 MB, replay), data/processed/{history_predictions,test_predictions,features_monitoring}.parquet,
+#   models/**, reports/** (evaluation tables used by the API)
+
+# Local state
+database/*.db
+mlruns.db
+mlruns/

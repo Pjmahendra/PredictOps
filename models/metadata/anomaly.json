@@ -1,0 +1,93 @@
+{
+  "selected_detector": "ocsvm",
+  "selection": "validation: events detected, then false alarms/day, then PR-AUC",
+  "features": [
+    "TP2_mean_30min",
+    "TP3_mean_30min",
+    "H1_mean_30min",
+    "DV_pressure_mean_30min",
+    "Oil_temperature_mean_30min",
+    "Motor_current_mean_30min",
+    "TP3_std_30min",
+    "Oil_temperature_std_30min",
+    "Motor_current_std_30min",
+    "DV_pressure_std_30min",
+    "duty_cycle_30min",
+    "load_cycles_per_h_2h",
+    "oil_temp_loaded_2h",
+    "oil_temp_vs_24h_baseline",
+    "tp3_vs_24h_baseline",
+    "motor_current_vs_24h_baseline",
+    "TP3_range_30min",
+    "lps_share_30min"
+  ],
+  "thresholds": {
+    "low": -0.1866561218443287,
+    "medium": -9.376913602911188e-09,
+    "high": -8.170371046375645e-14
+  },
+  "fit_period": [
+    "2020-02-01 00:00:00",
+    "2020-04-24 23:59:00"
+  ],
+  "fit_rows": 98261,
+  "calibration_period": [
+    "2020-04-25 00:00:00",
+    "2020-05-19 22:46:00"
+  ],
+  "alert_rule": "persistent: >=10 flagged minutes in trailing 30 min; episodes merged within 30 min, min 5 min",
+  "model_version": "anomaly-ocsvm-v1-20261106",
+  "artifact": "models/trained/anomaly_ocsvm.joblib",
+  "results": [
+    {
+      "detector": "ocsvm",
+      "set": "validation",
+      "pr_auc": 0.866755688812578,
+      "roc_auc": 0.9910173032058203,
+      "minute_recall": 0.9858592068859514,
+      "minute_precision": 0.9435127978817299,
+      "flagged_normal_share": 0.005045461712303569,
+      "events_detected": "2/2",
+      "lead_times_min": [
+        -16,
+        -20
+      ],
+      "false_alarm_episodes": 4.0,
+      "false_alarms_per_day": 0.139,
+      "fit_s": 0.2,
+      "score_ms_per_row": 0.0049
+    },
+    {
+      "detector": "ocsvm",
+      "set": "test",
+      "pr_auc": 0.36758230667909436,
+      "roc_auc": 0.9960048344997434,
+      "minute_recall": 0.6074074074074074,
+      "minute_precision": 0.28975265017667845,
+      "flagged_normal_share": 0.005553943714510714,
+      "events_detected": "1/1",
+      "lead_times_min": [
+        -34
+      ],
+      "false_alarm_episodes": 8.0,
+      "false_alarms_per_day": 0.159,
+      "fit_s": 0.2,
+      "score_ms_per_row": 0.0053
+    },
+    {
+      "detector": "ocsvm",
+      "set": "unreported_episodes",
+      "pr_auc": NaN,
+      "roc_auc": NaN,
+      "minute_recall": 0.9875303082784898,
+      "minute_precision": NaN,
+      "flagged_normal_share": NaN,
+      "events_detected": NaN,
+      "lead_times_min": NaN,
+      "false_alarm_episodes": NaN,
+      "false_alarms_per_day": NaN,
+      "fit_s": NaN,
+      "score_ms_per_row": NaN
+    }
+  ]
+}

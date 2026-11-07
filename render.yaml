@@ -1,0 +1,23 @@
+# Render blueprint: two web services from the same Docker image.
+# Free plan: 512 MB RAM, services sleep when idle, disk is ephemeral (SQLite resets on redeploy).
+services:
+  - type: web
+    name: predictops-api
+    runtime: docker
+    plan: free
+    healthCheckPath: /health
+    envVars:
+      - key: API_KEY
+        generateValue: true
+      - key: CORS_ORIGINS
+        value: https://predictops-dashboard.onrender.com
+  - type: web
+    name: predictops-dashboard
+    runtime: docker
+    plan: free
+    dockerCommand: sh -c "streamlit run frontend/app.py --server.port $PORT --server.address 0.0.0.0"
+    envVars:
+      - key: API_BASE_URL
+        value: https://predictops-api.onrender.com
+      - key: API_KEY
+        fromService: {type: web, name: predictops-api, envVarKey: API_KEY}

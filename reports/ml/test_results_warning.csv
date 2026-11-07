@@ -1,0 +1,7 @@
+horizon_h,model,train_onsets,test_onset,test_positives,test_rows,random_pr_auc,pr_auc,roc_auc
+2,logreg,"events 2, 3",event 4,120,72382,0.0017,0.0008,0.0213
+2,xgboost,"events 2, 3",event 4,120,72382,0.0017,0.0017,0.5266
+6,logreg,"events 2, 3",event 4,361,72382,0.005,0.0027,0.1643
+6,xgboost,"events 2, 3",event 4,361,72382,0.005,0.0028,0.1861
+12,logreg,"events 2, 3",event 4,720,72382,0.0099,0.0053,0.0965
+12,xgboost,"events 2, 3",event 4,720,72382,0.0099,0.0067,0.3221

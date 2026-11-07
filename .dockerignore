@@ -1,0 +1,16 @@
+.venv
+**/__pycache__
+data/raw
+data/train
+data/validation
+data/test
+data/uploads
+data/processed/features_1min.parquet
+data/processed/metropt3_labeled.parquet
+database/*.db
+logs
+mlruns.db
+notebooks
+tests
+reports/screenshots
+.git

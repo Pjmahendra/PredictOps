@@ -1,0 +1,20 @@
+# Local production-like deployment:  docker compose up --build   ->  http://localhost:8501
+services:
+  api:
+    build: .
+    environment:
+      - PORT=8000
+      - CORS_ORIGINS=http://localhost:8501
+      - MAX_UPLOAD_MB=50
+      # - API_KEY=change-me        # enable when exposed publicly
+    ports: ["8000:8000"]
+    volumes: ["predictops-db:/app/database"]
+  dashboard:
+    build: .
+    command: ["sh", "-c", "streamlit run frontend/app.py --server.port 8501 --server.address 0.0.0.0"]
+    environment:
+      - API_BASE_URL=http://api:8000
+    ports: ["8501:8501"]
+    depends_on: [api]
+volumes:
+  predictops-db:

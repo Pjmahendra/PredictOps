@@ -1,0 +1,194 @@
+{
+  "high_risk_event3": {
+    "timestamp": "2020-06-06 09:52:00",
+    "score": 0.9999775886535645,
+    "base_value_logit": 0.539093554019928,
+    "contributions": [
+      {
+        "feature": "DV_pressure",
+        "value": 2.1299999753634133,
+        "shap": 2.3976478576660156
+      },
+      {
+        "feature": "DV_pressure_mean_30min",
+        "value": 2.097212791442871,
+        "shap": 2.026679039001465
+      },
+      {
+        "feature": "DV_pressure_max_30min",
+        "value": 2.1646666526794434,
+        "shap": 1.707840085029602
+      },
+      {
+        "feature": "DV_pressure_mean_5min",
+        "value": 2.1245999336242676,
+        "shap": 1.5674396753311157
+      },
+      {
+        "feature": "DV_pressure_max_2h",
+        "value": 2.1689999103546143,
+        "shap": 1.4584968090057373
+      }
+    ]
+  },
+  "normal_minute": {
+    "timestamp": "2020-05-22 10:40:00",
+    "score": 2.9483895559678786e-05,
+    "base_value_logit": 0.539093554019928,
+    "contributions": [
+      {
+        "feature": "DV_pressure",
+        "value": -0.019999999552965164,
+        "shap": -4.144848823547363
+      },
+      {
+        "feature": "TP2_mean_5min",
+        "value": -0.010933333076536655,
+        "shap": 1.19437575340271
+      },
+      {
+        "feature": "DV_pressure_mean_30min",
+        "value": -0.019169840961694717,
+        "shap": -1.1114109754562378
+      },
+      {
+        "feature": "DV_pressure_mean_5min",
+        "value": -0.01966666616499424,
+        "shap": -0.9224133491516113
+      },
+      {
+        "feature": "TP3_mean_5min",
+        "value": 9.240400314331055,
+        "shap": -0.877554178237915
+      }
+    ]
+  },
+  "event4_missed": {
+    "timestamp": "2020-07-15 18:31:00",
+    "score": 0.09991595894098282,
+    "base_value_logit": 0.539093554019928,
+    "contributions": [
+      {
+        "feature": "TP3_mean_5min",
+        "value": 6.5441999435424805,
+        "shap": 2.5344693660736084
+      },
+      {
+        "feature": "DV_pressure_mean_5min",
+        "value": -0.009533333592116833,
+        "shap": -1.6743112802505493
+      },
+      {
+        "feature": "DV_pressure",
+        "value": -0.009333333310981592,
+        "shap": -1.3869547843933105
+      },
+      {
+        "feature": "DV_pressure_max_30min",
+        "value": -0.00866666715592146,
+        "shap": -1.3589890003204346
+      },
+      {
+        "feature": "DV_pressure_mean_30min",
+        "value": -0.009538095444440842,
+        "shap": -1.1109838485717773
+      }
+    ]
+  },
+  "anomaly_event4_mid": {
+    "timestamp": "2020-07-15 16:45:00",
+    "score": -0.19420211071950533,
+    "threshold_low": -0.1866561218443287,
+    "contributions": [
+      {
+        "feature": "TP2_mean_30min",
+        "value": 8.628355979919434,
+        "shap": 0.519780997429266
+      },
+      {
+        "feature": "H1_mean_30min",
+        "value": -0.002228571567684412,
+        "shap": 0.34157418753914026
+      },
+      {
+        "feature": "Motor_current_std_30min",
+        "value": 0.04808712750673294,
+        "shap": 0.24669590881065387
+      },
+      {
+        "feature": "Oil_temperature_mean_30min",
+        "value": 84.85733795166016,
+        "shap": 0.23504569833425754
+      },
+      {
+        "feature": "Motor_current_mean_30min",
+        "value": 5.583670616149902,
+        "shap": 0.23261661017999308
+      }
+    ]
+  },
+  "anomaly_event4_late": {
+    "timestamp": "2020-07-15 18:31:00",
+    "score": -0.0,
+    "threshold_low": -0.1866561218443287,
+    "contributions": [
+      {
+        "feature": "lps_share_30min",
+        "value": 1.0,
+        "shap": 0.505384674004925
+      },
+      {
+        "feature": "TP3_mean_30min",
+        "value": 6.867495059967041,
+        "shap": 0.5020495746815405
+      },
+      {
+        "feature": "tp3_vs_24h_baseline",
+        "value": -2.13683819770813,
+        "shap": 0.35865254277432623
+      },
+      {
+        "feature": "H1_mean_30min",
+        "value": -0.002552381018176675,
+        "shap": 0.29420161593907773
+      },
+      {
+        "feature": "oil_temp_loaded_2h",
+        "value": 83.92594146728516,
+        "shap": 0.2746399418215063
+      }
+    ]
+  },
+  "anomaly_normal": {
+    "timestamp": "2020-07-04 10:20:00",
+    "score": -2.892798946738984,
+    "threshold_low": -0.1866561218443287,
+    "contributions": [
+      {
+        "feature": "oil_temp_loaded_2h",
+        "value": 67.11060333251953,
+        "shap": 0.08302522929324752
+      },
+      {
+        "feature": "Oil_temperature_mean_30min",
+        "value": 66.35234069824219,
+        "shap": 0.08282128812740472
+      },
+      {
+        "feature": "TP3_mean_30min",
+        "value": 9.05593490600586,
+        "shap": -0.05803777411002985
+      },
+      {
+        "feature": "Oil_temperature_std_30min",
+        "value": 3.194322347640991,
+        "shap": -0.057605421970200237
+      },
+      {
+        "feature": "load_cycles_per_h_2h",
+        "value": 3.0,
+        "shap": -0.049862389671488906
+      }
+    ]
+  }
+}

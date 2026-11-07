@@ -1,0 +1,7 @@
+seed,model,val_pr_auc,test_pr_auc,test_recall,event4_detected,false_alarms_per_day
+1,lstm,1.0,0.0705,0.9741,True,0.5195
+1,cnn1d,1.0,0.0028,0.0,False,0.0
+2,lstm,1.0,0.0064,0.0,False,0.4156
+2,cnn1d,1.0,0.0021,0.0,False,0.0
+3,lstm,1.0,0.3166,1.0,True,0.5611
+3,cnn1d,1.0,0.002,0.0,False,0.0

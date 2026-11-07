@@ -1,0 +1,6 @@
+stage,n_features
+all_engineered,132
+after_variance,132
+after_correlation,106
+selected,33
+raw_sensor_means,13

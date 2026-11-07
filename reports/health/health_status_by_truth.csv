@@ -1,0 +1,9 @@
+split,group,minutes,status_Healthy,status_Warning,status_Critical,risk_Low,risk_Medium,risk_High,mean_health_score
+validation,normal minutes,38054,0.9933,0.0055,0.0012,0.9456,0.0518,0.0026,98.8
+validation,failure minutes,3253,0.0,0.0175,0.9825,0.0,0.0003,0.9997,15.5
+validation,CRITICAL as alarm (event level),2/2 events; 0.07 false alarms/day,,,,,,,
+validation,WARNING+ as alarm (event level),2/2 events; 0.24 false alarms/day,,,,,,,
+test,normal minutes,72381,0.9926,0.006,0.0015,0.9852,0.013,0.0018,99.0
+test,failure minutes,270,0.3185,0.0667,0.6148,0.0,0.7074,0.2926,50.9
+test,CRITICAL as alarm (event level),1/1 events; 0.10 false alarms/day,,,,,,,
+test,WARNING+ as alarm (event level),1/1 events; 0.20 false alarms/day,,,,,,,

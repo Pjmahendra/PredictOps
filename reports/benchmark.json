@@ -1,0 +1,27 @@
+{
+  "machine": "arm64 Darwin 27.2.0",
+  "python": "3.12.16",
+  "model_load_s": 0.07,
+  "predict_1day_s": 0.17,
+  "rows_1day_10s": 8661,
+  "minutes_1day": 1433,
+  "predict_full_dataset_252k_min_s": 22.8,
+  "shap_100_rows_s": 0.52,
+  "api/health_median_ms": 5,
+  "api/replay/step_median_ms": 162,
+  "api/history_median_ms": 95,
+  "peak_rss_mb": 796,
+  "artifact_sizes_mb": {
+    "detect_xgboost.joblib": 0.53,
+    "anomaly_robust_z.joblib": 0.01,
+    "dl_cnn1d.pt": 0.04,
+    "anomaly_ocsvm.joblib": 0.03,
+    "anomaly_lof.joblib": 8.41,
+    "detect_svm.joblib": 0.04,
+    "detect_tree.joblib": 0.01,
+    "detect_logreg.joblib": 0.01,
+    "dl_lstm.pt": 0.06,
+    "detect_rf.joblib": 0.31,
+    "anomaly_isolation_forest.joblib": 13.15
+  }
+}

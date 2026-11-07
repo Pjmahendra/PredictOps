@@ -1,0 +1,58 @@
+{
+  "created_utc": "2026-11-06T09:54:05+00:00",
+  "fitted_on": "split == 'train' & usable == 1",
+  "fit_rows": 755440,
+  "fit_period": [
+    "2020-02-01 00:00:00",
+    "2020-05-19 22:46:34"
+  ],
+  "numeric_features": [
+    "TP2",
+    "TP3",
+    "H1",
+    "DV_pressure",
+    "Oil_temperature",
+    "Motor_current"
+  ],
+  "binary_features": [
+    "COMP",
+    "DV_eletric",
+    "Towers",
+    "LPS",
+    "Pressure_switch",
+    "Oil_level",
+    "Caudal_impulses"
+  ],
+  "dropped_as_redundant": {
+    "Reservoirs": "r=1.000 with TP3",
+    "MPG": "r=0.985 with COMP"
+  },
+  "scaler": "StandardScaler (mean / std); RobustScaler rejected \u2014 IQR\u22480.004 for TP2, DV_pressure",
+  "imputer": "median (numeric), most_frequent (binary)",
+  "scaler_mean": {
+    "TP2": 1.0485860555631001,
+    "TP3": 9.009005840768895,
+    "H1": 7.91041674251102,
+    "DV_pressure": 0.024990956258929456,
+    "Oil_temperature": 59.211961419821215,
+    "Motor_current": 1.6805282520437077
+  },
+  "scaler_scale": {
+    "TP2": 2.9334401512617783,
+    "TP3": 0.605419960594001,
+    "H1": 2.9767199921735537,
+    "DV_pressure": 0.27211558457078705,
+    "Oil_temperature": 6.149176555178926,
+    "Motor_current": 2.212687480813127
+  },
+  "warning_horizons_hours": [
+    2,
+    6,
+    12
+  ],
+  "splits": {
+    "validation_start": "2020-05-21 00:00:00",
+    "test_start": "2020-07-01 00:00:00",
+    "embargo_hours": 12
+  }
+}
