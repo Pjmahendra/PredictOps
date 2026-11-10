@@ -36,6 +36,11 @@ async def lifespan(app: FastAPI):
         log.info("models loaded: %s", p.model_versions)
         with session_factory(settings.database_url)() as db:
             register_versions(db)
+        import os
+        if os.environ.get("SIMULATION_AUTOSTART", "").lower() in ("1", "true", "yes"):
+            from backend.routes.api import simulation_start      # synthetic demo stream, opt-in only
+            simulation_start(speed=float(os.environ.get("SIMULATION_SPEED", "2")), seed=None, reset=False, predictor=p)
+            log.info("simulation autostarted")
     except Exception as ex:                                   # app still starts; /health reports 'degraded'
         log.error("startup: models not loaded: %s", ex)
     yield

@@ -2,8 +2,8 @@
 
 ---
 
-## 1. Testing strategy (pytest) — **69 tests, all passing**
-`.venv/bin/pytest -q` → `69 passed` (≈12 s). UI tests need the API running.
+## 1. Testing strategy (pytest) — **73 tests, all passing**
+`.venv/bin/pytest -q` → `73 passed` (≈12 s). UI tests need the API running.
 
 | File | # | Level | What is verified |
 |---|---|---|---|

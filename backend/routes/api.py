@@ -417,3 +417,49 @@ def run_report(run_id: int, db: Session = Depends(get_db), predictor: PredictOps
                            "MetroPT-3 APU compressor (metro train air production unit)")
     return StreamingResponse(io.BytesIO(pdf), media_type="application/pdf",
                              headers={"Content-Disposition": f"attachment; filename=predictops_report_run{run_id}.pdf"})
+
+
+# ======================================================================== live SIMULATION (synthetic)
+_SIM = {"sim": None}
+
+
+def _sim_payload(minutes: int) -> dict:
+    sim = _SIM["sim"]
+    if sim is None:
+        return {"mode": "SIMULATED (synthetic data)", "running": False, "rows": [], "phases": []}
+    snap = sim.snapshot(minutes)
+    keep = ["timestamp", "health_score", "health_status", "failure_risk", "anomaly_status", "anomaly_score",
+            "anomaly_severity", "detector_prob", "reasons", "recommendations", "sim_phase",
+            "TP2", "TP3", "H1", "DV_pressure", "Oil_temperature", "Motor_current", "LPS"]
+    snap["rows"] = _json_df(pd.DataFrame(snap["rows"])[keep]) if snap["rows"] else []
+    return snap
+
+
+@router.post("/simulation/start", tags=["simulation"])
+def simulation_start(speed: float = Query(1.0, ge=0.1, le=30, description="simulated minutes per real second"),
+                     seed: int | None = None, reset: bool = False,
+                     predictor: PredictOpsPredictor = Depends(predictor_dep)):
+    """Start a continuous SYNTHETIC sensor stream that goes healthy → degrading → failure at random times.
+    Readings are recombined real MetroPT-3 signals on a simulated clock — demo data, not a real machine."""
+    from predictops.simulation.simulator import StreamSimulator
+    sim = _SIM["sim"]
+    if sim is None or reset or seed is not None:
+        if sim is not None:
+            sim.stop()
+        sim = _SIM["sim"] = StreamSimulator(_raw10s(), load_config()["failure_events"], predictor, speed, seed)
+    sim.speed = speed
+    sim.start()
+    return _sim_payload(60)
+
+
+@router.post("/simulation/stop", tags=["simulation"])
+def simulation_stop():
+    if _SIM["sim"] is not None:
+        _SIM["sim"].stop()
+    return _sim_payload(60)
+
+
+@router.get("/simulation/state", tags=["simulation"])
+def simulation_state(minutes: int = Query(180, ge=10, le=720)):
+    """Latest simulated readings + assessments, and the simulation's phase schedule (its ground truth)."""
+    return _sim_payload(minutes)

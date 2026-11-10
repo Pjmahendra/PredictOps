@@ -13,7 +13,7 @@ try:
 except Exception:
     API_UP = False
 pytestmark = pytest.mark.skipif(not API_UP, reason="start the API first")
-PAGES = ["overview", "sensors", "prediction", "anomaly", "explain", "health", "maintenance", "performance", "monitoring", "replay"]
+PAGES = ["overview", "sensors", "prediction", "anomaly", "explain", "health", "maintenance", "performance", "monitoring", "replay", "simulation"]
 
 
 @pytest.fixture(autouse=True, scope="module")

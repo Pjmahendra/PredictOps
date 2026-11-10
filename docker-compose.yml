@@ -6,6 +6,8 @@ services:
       - PORT=8000
       - CORS_ORIGINS=http://localhost:8501
       - MAX_UPLOAD_MB=50
+      - SIMULATION_AUTOSTART=true   # synthetic demo stream (Live Simulation page); set false to disable
+      - SIMULATION_SPEED=2          # simulated minutes per real second
       # - API_KEY=change-me        # enable when exposed publicly
     ports: ["8000:8000"]
     volumes: ["predictops-db:/app/database"]

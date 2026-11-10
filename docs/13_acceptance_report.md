@@ -1,6 +1,6 @@
 # 13 — Final Acceptance Report & Project Audit
 
-Date: 2026-11-06 · Test suite: **69 passed** (`.venv/bin/pytest -q`) · Docker deployment verified locally.
+Date: 2026-11-06 · Test suite: **73 passed** (`.venv/bin/pytest -q`) · Docker deployment verified locally.
 
 Legend: ✅ completed and verified · 🟡 implemented, not fully verified · 🟠 partially implemented · ⚪ not applicable (with reason) · ⏳ pending
 
@@ -47,6 +47,7 @@ Legend: ✅ completed and verified · 🟡 implemented, not fully verified · �
 | Historical prediction functionality | ✅ | `/predictions`, `/runs`, dashboard history |
 | Dashboard uses real results | ✅ | all charts from API; gap-aware lines |
 | Reports downloadable | ✅ | CSV + PDF (`test_pdf_report`) |
+| Live simulation (synthetic stream, labelled) | ✅ | docs/14, `tests/test_simulation.py` |
 | Historical replay | ✅ | `/replay/step` re-runs pipeline on raw data; labelled as replay |
 | Data & model monitoring | ✅ | KS/PSI drift, prediction drift, monthly report |
 | User authentication | 🟠 | API-key auth for public deployments; no per-user accounts (not required for a single-operator demo) |
@@ -96,4 +97,4 @@ Legend: ✅ completed and verified · 🟡 implemented, not fully verified · �
 2. LOF and robust-z anomaly detectors did not work as configured (explained, not tuned on events).
 3. PSI textbook thresholds are too sensitive for this data — interpret drift relative to training-month variation.
 4. Cloud deployment not performed (account needed); Render free tier has 512 MB RAM and ephemeral disk.
-5. Git repository initialised but **no commit made** — run the commands in README when ready.
+5. Live Simulation uses synthetic data (recombined real recordings); it demonstrates the app, not accuracy.

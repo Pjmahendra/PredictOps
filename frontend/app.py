@@ -11,6 +11,7 @@ pages = {
         st.Page("views/overview.py", title="Overview", icon="🏠", default=True),
         st.Page("views/sensors.py", title="Sensor Monitoring", icon="📈"),
         st.Page("views/replay.py", title="Historical Replay", icon="⏯️"),
+        st.Page("views/simulation.py", title="Live Simulation", icon="🧪"),
     ],
     "Intelligence": [
         st.Page("views/prediction.py", title="Failure Prediction", icon="🎯"),

@@ -137,3 +137,10 @@ def test_pdf_report(client):
     run = client.post("/predict", json={"sample_name": "event4_2020-07-15.csv"}).json()["run"]
     r = client.get(f"/reports/run/{run['id']}.pdf")
     assert r.status_code == 200 and r.content[:4] == b"%PDF" and len(r.content) > 3000
+
+
+def test_api_simulation_endpoints(client):
+    r = client.post("/simulation/start", params={"speed": 0.1, "seed": 3}); assert r.status_code == 200
+    s = client.get("/simulation/state", params={"minutes": 60}).json()
+    assert s["rows"] and s["mode"].startswith("SIMULATED")
+    assert client.post("/simulation/stop").json()["running"] is False
