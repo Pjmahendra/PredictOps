@@ -108,7 +108,9 @@ erDiagram
 - **Authentication:** not stored in the DB. A single API key (environment variable) protects public deployments. No user accounts were needed.
 
 ## 4. Dashboard (Streamlit + Plotly), 10 pages
-Dark navy theme, blue/cyan accents, status colours green/amber/red **always shown with an icon and a text label**.
+Light theme (white surfaces, light-blue background, blue accents), status colours green/amber/red **always shown with an icon and a text label**.
+
+**Navigation.** A top navigation bar (`st.navigation(position="top")`): Overview, then drop-down menus Monitor / Intelligence / Models & Data. Inside every page a button bar (`ui.subnav`, a Streamlit segmented control) switches between the page's sections, so only one section is shown at a time instead of one long scrolling page. The selected section is kept in `st.session_state`; after a prediction run the page jumps to *2 · Results* by itself.
 The chart palette was checked with a colour-validation script for colour-blind safety and contrast on the navy background (all checks pass).
 Screenshots: `reports/screenshots/*.png`.
 
@@ -180,3 +182,17 @@ Charts break their lines at recording gaps (`lib/api.py::break_gaps`), so no cha
 | Container | runs as a non-root user; only runtime files copied (`.dockerignore` excludes raw data, DB, logs, tests) |
 | Logging | every request logged with method, path, status and latency |
 | Pickle risk | models are loaded only from the project's own `models/` folder; uploads are parsed as CSV, never unpickled |
+
+
+### Visual design: animations and 3D views (UI enhancement)
+- **Fonts:** Bricolage Grotesque (titles), Plus Jakarta Sans (text), JetBrains Mono (numbers), loaded from Google Fonts; system fonts are used if offline.
+- **Animations (CSS only, in `frontend/lib/ui.py`):** cards rise in one after another and lift on hover; line charts draw themselves,
+  bars grow and markers pop in; chart panels tilt slightly in 3D on hover. All motion is switched off when the operating system's
+  "reduce motion" setting is on. Live-simulation cards (refreshed every 2 s) don't replay the entrance animation.
+- **3D views (Plotly, with a ▶ Rotate button from `ui.orbit`):**
+  - *Anomaly Detection → 3D sensor space:* every minute placed by TP3 × oil temperature × motor current, coloured by anomaly severity;
+    reported-failure minutes are red diamonds and separate visibly from the normal cloud.
+  - *Equipment Health → 3D health landscape:* day × hour of day × mean health score (at least 14 days); valleys = poor health.
+  - *Model Performance → 3D model map:* validation PR-AUC × test PR-AUC × test ROC-AUC per model — the validation-vs-test gap in one picture.
+- **Playable timeline (`ui.play_controls`):** Overview → Health trend has ▶ Play and a slider that reveal the 7 months week by week.
+- The 3D views are extra views; every number is still shown in a normal 2D chart or table, because 2D is easier to read precisely.

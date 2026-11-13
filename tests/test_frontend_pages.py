@@ -36,4 +36,6 @@ def test_prediction_flow_runs_sample():
     at.selectbox[0].set_value("event4_2020-07-15.csv").run()
     at.button[0].click().run()
     assert not at.exception, [e.value for e in at.exception]
-    assert any("run #" in m.value for m in at.markdown)
+    # after running, the page jumps to the "2 · Results" section by itself
+    assert at.session_state["nav_pred"] == "2 · Results"
+    assert any("Run #" in c.value for c in at.caption)

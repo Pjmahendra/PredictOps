@@ -13,8 +13,8 @@ try:
 except api.ApiError as ex:
     ui.error_box(ex); st.stop()
 
-t1, t2, t3, t4 = st.tabs(["Drift over time", "Check a window / upload", "Datasets & validation", "Model versions"])
-with t1:
+_sec = ui.subnav(["Drift over time", "Check a window / upload", "Datasets & validation", "Model versions"], "monitor")
+if _sec == 'Drift over time':
     c1, c2 = st.columns(2)
     with c1:
         fig = go.Figure(go.Bar(x=monthly.month, y=monthly.anomaly_flag_share, marker_color=ui.SERIES[0], text=(monthly.anomaly_flag_share * 100).round(2).astype(str) + "%",
@@ -31,7 +31,7 @@ with t1:
     ui.note("Even training months show 'major' PSI against the pooled Feb–May reference: monthly operating conditions differ and the "
             "textbook 0.1/0.25 PSI cut-offs are too sensitive for these multi-modal signals. Interpret drift <i>relative to training-month "
             "variation</i>; the summer months show the expected oil-temperature shift (top drifting feature).")
-with t2:
+if _sec == 'Check a window / upload':
     mode = st.radio("Current data", ["Historical window", "Uploaded run"], horizontal=True)
     try:
         if mode == "Historical window":
@@ -57,7 +57,7 @@ with t2:
     fig.update_layout(height=480, hovermode="closest", title="PSI per feature (clipped at 2)", yaxis=dict(autorange="reversed"))
     st.plotly_chart(fig, use_container_width=True)
     st.dataframe(f.round(4), hide_index=True, use_container_width=True); st.caption(d["note"])
-with t3:
+if _sec == 'Datasets & validation':
     up = st.file_uploader("Upload a CSV to validate (MetroPT-3 format)", type=["csv"])
     if up is not None:
         try:
@@ -69,7 +69,7 @@ with t3:
     if datasets:
         d = pd.DataFrame(datasets); d["valid"] = d.validation.map(lambda v: "✔ valid" if v["ok"] else "✖ " + "; ".join(v["errors"])[:80])
         st.dataframe(d[["id", "original_filename", "source", "n_rows", "start_time", "end_time", "valid", "uploaded_at"]], hide_index=True, use_container_width=True)
-with t4:
+if _sec == 'Model versions':
     st.dataframe(pd.DataFrame(versions), hide_index=True, use_container_width=True)
     info = api.cached("/models")
     st.json({"failure_detector": {k: info["failure_detector"][k] for k in ["version", "algorithm", "threshold", "train_period", "selection"]},

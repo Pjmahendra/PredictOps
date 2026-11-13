@@ -6,7 +6,8 @@ from plotly.subplots import make_subplots
 
 from lib import api, ui
 
-ui.setup("Live Simulation", "A synthetic sensor stream runs continuously and drifts from healthy to failure at random times")
+ui.setup("Live Simulation", "A synthetic sensor stream runs continuously and drifts from healthy to failure at random times",
+         pill="Simulated stream · synthetic data")
 ui.note("<b>SIMULATED DATA.</b> Readings are synthetic: pieces of real MetroPT-3 normal and failure recordings are "
         "blended on a simulated clock. This is a demo of the pipeline reacting live, not a real machine and not a result.")
 
@@ -15,6 +16,7 @@ PHASE_FILL = {"degrading": "rgba(250,178,25,0.14)", "failure": ui.FAIL_FILL, "ma
 c1, c2, c3, c4, c5 = st.columns([1.3, 1, 1, 1, 1.2])
 speed = c1.select_slider("Speed (sim-min per second)", [0.5, 1, 2, 5, 10], value=2)
 window = c5.selectbox("Show last", [60, 180, 360, 720], index=1, format_func=lambda m: f"{m // 60 or m} {'h' if m >= 60 else 'min'}")
+sec = ui.subnav(["Live charts", "Reasons & actions", "Phase timeline"], "sim")
 show_truth = st.toggle("Show injected phases (simulation ground truth)", value=True)
 try:
     if c2.button("▶ Start", type="primary", use_container_width=True):
@@ -39,12 +41,24 @@ def live():
     d = pd.DataFrame(s["rows"]); d["timestamp"] = pd.to_datetime(d.timestamp)
     last = d.iloc[-1]
     c = st.columns(5)
-    with c[0]: ui.card("Sim clock", f"{last.timestamp:%H:%M}", "running" if s["running"] else "stopped")
-    with c[1]: ui.card("Health", f"{last.health_score:.0f}", "", last.health_status)
-    with c[2]: ui.card("Failure risk", last.failure_risk, "", last.failure_risk)
-    with c[3]: ui.card("Anomaly severity", str(last.anomaly_severity), "", last.anomaly_status)
-    with c[4]: ui.card("Injected phase", s["current_phase"] if show_truth else "hidden", "ground truth of the simulator")
+    with c[0]: ui.card("Sim clock", f"{last.timestamp:%H:%M}", "running" if s["running"] else "stopped", animate=False)
+    with c[1]: ui.card("Health", f"{last.health_score:.0f}", "", last.health_status, animate=False)
+    with c[2]: ui.card("Failure risk", last.failure_risk, "", last.failure_risk, animate=False)
+    with c[3]: ui.card("Anomaly severity", str(last.anomaly_severity), "", last.anomaly_status, animate=False)
+    with c[4]: ui.card("Injected phase", s["current_phase"] if show_truth else "hidden", "ground truth of the simulator", animate=False)
 
+    if sec == "Reasons & actions":
+        l, r = st.columns(2)
+        with l:
+            st.markdown("**Reasons**"); ui.bullet_list(last.reasons or ["—"])
+        with r:
+            st.markdown("**Recommended actions**"); ui.bullet_list(last.recommendations or ["—"])
+        return
+    if sec == "Phase timeline":
+        ph = pd.DataFrame(s["phases"])
+        st.dataframe(ph.iloc[::-1] if show_truth else ph.assign(phase="hidden").iloc[::-1], hide_index=True, use_container_width=True)
+        st.caption("Phases injected by the simulator (its ground truth). Maintenance = logger silent, so a new data segment starts.")
+        return
     gaps = d.timestamp.diff() > pd.Timedelta(minutes=2)          # maintenance: logger silent -> break the lines
     if gaps.any():
         d = pd.concat([d, pd.DataFrame({"timestamp": d.timestamp[gaps] - pd.Timedelta(seconds=30)})]).sort_values("timestamp")
@@ -64,11 +78,6 @@ def live():
     st.plotly_chart(fig, use_container_width=True)
     if show_truth:
         st.caption("Shading: amber = degrading injected · red = failure injected · grey = maintenance (logger silent)")
-    l, r = st.columns(2)
-    with l:
-        st.markdown("**Reasons**"); ui.bullet_list(last.reasons or ["—"])
-    with r:
-        st.markdown("**Recommended actions**"); ui.bullet_list(last.recommendations or ["—"])
 
 
 live()

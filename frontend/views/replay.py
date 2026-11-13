@@ -11,6 +11,15 @@ from lib.common import events
 ui.setup("Historical Replay", "Step through recorded sensor data; each step re-runs the full PredictOps pipeline on the raw readings")
 ui.note("<b>Simulated monitoring from historical data</b> — this is a replay of readings recorded in 2020, not a live equipment connection.")
 fails, _ = events()
+sec = ui.subnav(["Run replay", "How replay works"], "replay")
+if sec == "How replay works":
+    ui.bullet_list([
+        "Pick a scenario (or a custom start), a step size and the number of steps.",
+        "Each step sends the timestamp to the API (<code>/replay/step</code>), which takes the <b>raw 10-s readings</b> before that minute "
+        "and runs the full pipeline: cleaning → features → anomaly model → signature model → health engine.",
+        "Red shading marks a company-reported failure window, so you can see when PredictOps reacts.",
+        "Logger gaps return 'no data' instead of invented values."])
+    st.stop()
 c1, c2, c3, c4 = st.columns([2, 1, 1, 1])
 preset = c1.selectbox("Scenario", ["Event 4 build-up (15 Jul, unseen test)", "Event 2 (30 May)", "Normal day (10 Aug)", "Custom"])
 starts = {"Event 4 build-up (15 Jul, unseen test)": "2020-07-15 10:00", "Event 2 (30 May)": "2020-05-29 21:30", "Normal day (10 Aug)": "2020-08-10 08:00"}
